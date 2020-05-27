@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask, redirect
 
 app = Flask(__name__)
@@ -7,7 +8,8 @@ messages = []
 
 def add_messages(username, message):
     """ add messages to messags list"""
-    messages.append("{}: {}".format(username, message))
+    now = datetime.now().strftime("%H : %M : %S")
+    messages.append("({}) {}: {}".format(now, username, message))
 
 
 def get_all_messages():
@@ -24,7 +26,7 @@ def index():
 @app.route("/<username>")
 def user(username):
     """Display chat messages"""
-    return "<h1>Welcome{0}</h1> {1}".format(username,get_all_messages())
+    return "<h1>Welcome {0} </h1> {1}".format(username, get_all_messages())
 
 
 @app.route("/<username>/<message>")
