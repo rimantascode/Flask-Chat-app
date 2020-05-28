@@ -1,4 +1,3 @@
-
 import os
 from datetime import datetime
 from flask import Flask, redirect, render_template, request, session
@@ -31,7 +30,8 @@ def index():
 @app.route("/<username>")
 def user(username):
     """Display chat messages"""
-    return "<h1>Welcome, {0}</h1>{1}".format(username, messages)
+    return render_template("chat.html", username=username,
+                           chat_messages=messages)
 
 
 @app.route("/<username>/<message>")
